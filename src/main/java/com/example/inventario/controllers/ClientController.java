@@ -28,12 +28,12 @@ public class ClientController {
     public ResponseEntity<?> update(@RequestBody Client client){
        return service.update(client);
     }
-    @GetMapping("/search")
-    public ResponseEntity<?> find(int id){
+    @GetMapping("/search/{id}")
+    public ResponseEntity<?> find(@PathVariable int id){
        return service.findById(id);
     }
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> delete(int id){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable int id){
         return service.delete(id);
     }
 }

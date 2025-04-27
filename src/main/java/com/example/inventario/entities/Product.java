@@ -1,17 +1,26 @@
 package com.example.inventario.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
+@Table(name="product")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "code"
+)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int code;
     private String name;
     private double price;
-    @ManyToOne
-    @JoinColumn(name = "idAccount")
-    private Account account;
+    @ManyToMany(mappedBy = "products")
+    private List<Account> accounts=new ArrayList<>();
 
     public int getCode() {
         return code;
@@ -37,5 +46,11 @@ public class Product {
         this.price = price;
     }
 
+    public List<Account> getAccounts() {
+        return accounts;
+    }
 
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
 }

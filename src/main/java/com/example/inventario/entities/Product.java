@@ -1,6 +1,7 @@
 package com.example.inventario.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -19,6 +20,7 @@ public class Product {
     private int code;
     private String name;
     private double price;
+    @JsonIgnore
     @ManyToMany(mappedBy = "products")
     private List<Account> accounts=new ArrayList<>();
 

@@ -1,6 +1,7 @@
 package com.example.inventario.services;
 
 import com.example.inventario.entities.Account;
+import com.example.inventario.entities.AddProdutctDto;
 import com.example.inventario.entities.Client;
 import com.example.inventario.entities.Product;
 import com.example.inventario.repositories.AccountRepository;
@@ -52,14 +53,16 @@ public class AccountService {
         }
     }
 
-    public ResponseEntity<?> addProduct(Integer idAc, Integer idP) {
-        Optional<Product> productOpt = productRepository.findById(idP);
-        Optional<Account> accountOpt = repository.findByClientId(idAc);
+    public ResponseEntity<?> addProduct(AddProdutctDto request) {
+        Optional<Product> productOpt = productRepository.findById(request.getProductId());
+        Optional<Account> accountOpt = repository.findByClientId(request.getIdCliente());
+
         if (productOpt.isPresent() && accountOpt.isPresent()) {
             Account ac = accountOpt.get();
             Product p = productOpt.get();
             ac.getProducts().add(p);
             p.getAccounts().add(ac);
+            p.setStock(p.getStock()-request.getStock());
             ac.setMount(ac.getMount() + p.getPrice());
             repository.save(ac);
             return ResponseEntity.ok("Producto asignado con exito");

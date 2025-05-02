@@ -20,6 +20,7 @@ public class Product {
     private int code;
     private String name;
     private double price;
+    private int stock;
     @JsonIgnore
     @ManyToMany(mappedBy = "products")
     private List<Account> accounts=new ArrayList<>();
@@ -46,6 +47,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public List<Account> getAccounts() {

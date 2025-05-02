@@ -9,6 +9,7 @@ import java.util.Optional;
 
 
 public interface AccountRepository extends CrudRepository<Account,Integer> {
+
     @Query("SELECT a FROM Account a where a.client.id=:idClient")
     Optional<Account> findByClientId(@Param("idClient") Integer idClient);
 }

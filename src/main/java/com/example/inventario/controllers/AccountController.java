@@ -1,5 +1,6 @@
 package com.example.inventario.controllers;
 
+import com.example.inventario.entities.AddProdutctDto;
 import com.example.inventario.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +25,9 @@ public class AccountController {
         service.save(id);
     }
 
-    @PutMapping("/addProduct/{idCli}/product/{idP}")
-    public ResponseEntity<?> add(@PathVariable int idCli,@PathVariable int idP){
-        return service.addProduct(idCli,idP);
+    @PutMapping("/addProduct")
+    public ResponseEntity<?> add(@RequestBody AddProdutctDto request){
+        return service.addProduct(request);
     }
 
     @PutMapping("/pay/{mount}/client/{idCli}")

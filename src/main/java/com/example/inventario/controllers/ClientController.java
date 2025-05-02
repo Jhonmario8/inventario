@@ -24,6 +24,10 @@ public class ClientController {
     public void save(@RequestBody Client client){
         service.save(client);
     }
+    @GetMapping("/findByName/{name}")
+    public ResponseEntity<?> findByName(@PathVariable String name){
+        return service.findByName(name);
+    }
     @PostMapping("/update")
     public ResponseEntity<?> update(@RequestBody Client client){
        return service.update(client);

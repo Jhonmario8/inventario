@@ -23,7 +23,16 @@ public class ClientService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro el cliente");
         }
     }
+    public ResponseEntity<?> findByName(String name){
+        Optional<Client> clientOpt=repository.findByName(name);
 
+        if (clientOpt.isPresent()) {
+            return ResponseEntity.ok(clientOpt.get());
+        }else{
+            System.out.println("No se encontro");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro el cliente");
+        }
+    }
     public List<Client> findAll() {
         return (List<Client>) repository.findAll();
     }

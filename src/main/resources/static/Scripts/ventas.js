@@ -115,3 +115,41 @@ document.querySelector("button").addEventListener("click",async e=>{
         console.error(e)
     }
 })
+
+document.getElementById("accoutn").addEventListener("input",async e=>{
+    e.preventDefault()
+
+    const name=e.target.value
+
+    let accs= document.getElementById("accounts")
+    accs.setAttribute("class","accounts-table")
+    let table=document.getElementById("cuentas-tabla")
+    if (name===""){
+        accs.removeAttribute("class")
+        accs.style.display="none"
+
+    }
+    table.innerHTML=""
+    try{
+        let res=await fetch(`http://localhost:8080/client/nameContain/${name}`)
+        if (!res.ok){
+            throw new Error("Error al obtener los clientes")
+        }
+        let accounts=await res.json();
+        accounts.forEach(ac=>{
+            let row=document.createElement("tr")
+            row.innerHTML=`
+            <td>${ac.id}</td>
+            <td>${ac.name}</td>
+            `
+            row.addEventListener("dblclick",ev=>{
+                e.target.value=ac.name
+                accs.removeAttribute("class")
+                accs.style.display="none"
+            })
+            table.appendChild(row)
+        })
+    }catch (e){
+        console.error(e)
+    }
+})

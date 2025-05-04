@@ -59,4 +59,7 @@ public class ClientService {
         }
     }
 
+    public List<Client> findByNameContaining(String name){
+        return (List<Client>) repository.findClientByNameContaining(name);
+    }
 }

@@ -40,4 +40,8 @@ public class ClientController {
     public ResponseEntity<?> delete(@PathVariable int id){
         return service.delete(id);
     }
+    @GetMapping("nameContain/{name}")
+    public List<Client> nameContain(@PathVariable String name){
+        return service.findByNameContaining(name);
+    }
 }

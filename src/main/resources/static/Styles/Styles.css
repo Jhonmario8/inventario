@@ -202,6 +202,13 @@ display: flex;
     letter-spacing: 1px;
     font-size: 1.1rem;
     margin: 7px;
+    transition: background-color .3s;
+
+}
+.form-style button:hover{
+    cursor: pointer;
+    background-color: #2980b9;
+
 }
 .accounts-table {
     display: block !important; /* Necesario para mostrar/ocultar dinámicamente */
@@ -245,4 +252,7 @@ display: flex;
 
 .accounts-table tbody tr:nth-child(odd) {
     background-color: #2c3e50; /* Azul oscuro para filas impares */
+}
+.info{
+    font-size: 1.1rem;
 }

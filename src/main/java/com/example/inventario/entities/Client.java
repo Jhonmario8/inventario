@@ -2,8 +2,6 @@ package com.example.inventario.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "client")
 public class Client {
@@ -48,4 +46,11 @@ public class Client {
         this.age = age;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

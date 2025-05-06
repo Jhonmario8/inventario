@@ -47,8 +47,10 @@ public class AccountService {
     public void save(Integer id) {
         Optional<Client> clientOpt = clientRepository.findById(id);
         if (clientOpt.isPresent()) {
+            Client client=clientOpt.get();
             Account ac = new Account();
-            ac.setClient(clientOpt.get());
+            ac.setClient(client);
+            client.setAccount(ac);
             repository.save(ac);
         }
     }
@@ -68,7 +70,6 @@ public class AccountService {
             return ResponseEntity.ok("Producto asignado con exito");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El producto o la cuenta no existen");
-
         }
     }
 

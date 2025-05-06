@@ -1,6 +1,7 @@
 package com.example.inventario.services;
 
 import com.example.inventario.entities.Client;
+import com.example.inventario.repositories.AccountRepository;
 import com.example.inventario.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import java.util.Optional;
 public class ClientService {
     @Autowired
     private ClientRepository repository;
+    @Autowired
+    private AccountService accountService;
 
     public ResponseEntity<?> findById(Integer id) {
         Optional<Client> clientOpt = repository.findById(id);
@@ -40,6 +43,8 @@ public class ClientService {
 
     public void save(Client client) {
         repository.save(client);
+        accountService.save(client.getId());
+
     }
 
     public ResponseEntity<?> delete(Integer id) {

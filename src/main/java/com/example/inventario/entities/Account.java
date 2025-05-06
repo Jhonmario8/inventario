@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "account")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "idAccount"
+        property = "id"
 )
 public class Account {
     @Id
@@ -19,7 +19,7 @@ public class Account {
     private int id;
     private double mount;
     @OneToOne
-    @JoinColumn(name = "idClient")
+    @JoinColumn(name = "idClient", nullable = false)
     private Client client;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})

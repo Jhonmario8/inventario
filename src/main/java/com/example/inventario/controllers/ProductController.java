@@ -23,8 +23,8 @@ public class ProductController {
         service.save(product);
     }
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Product product){
-        return service.update(product);
+    public void update(@RequestBody Product product){
+         service.update(product);
     }
     @GetMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable int id){
@@ -41,5 +41,9 @@ public class ProductController {
     @GetMapping("/showAll")
     public List<Product> showAll(){
         return service.findAll();
+    }
+    @DeleteMapping("/deleteByNama/{name}")
+    public void deleteByName(@PathVariable String name){
+        service.deleteByName(name);
     }
 }

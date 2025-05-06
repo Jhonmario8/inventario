@@ -45,4 +45,14 @@ public class ProductService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El producto no se encontro");
         }
     }
+
+    public ResponseEntity<?> searchByName(String name){
+
+        Optional<Product> productOpt=repository.findByName(name);
+        if (productOpt.isPresent()){
+            return ResponseEntity.ok(productOpt.get());
+        } else {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro el producto");
+        }
+    }
 }

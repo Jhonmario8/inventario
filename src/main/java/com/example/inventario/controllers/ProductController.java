@@ -34,4 +34,8 @@ public class ProductController {
     public List<Product> findByName(@PathVariable String name){
         return service.findByName(name);
     }
+    @GetMapping("/searchByName/{name}")
+    public ResponseEntity<?> search(@PathVariable String name){
+        return service.searchByName(name);
+    }
 }

@@ -14,6 +14,9 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     private ProductRepository repository;
+    public List<Product> findAll(){
+        return (List<Product>) repository.findAll();
+    }
     public ResponseEntity<?> findById(Integer id){
         Optional<Product> productOpt=repository.findById(id);
         if (productOpt.isPresent()){

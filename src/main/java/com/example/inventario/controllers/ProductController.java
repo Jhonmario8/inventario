@@ -38,4 +38,8 @@ public class ProductController {
     public ResponseEntity<?> search(@PathVariable String name){
         return service.searchByName(name);
     }
+    @GetMapping("/showAll")
+    public List<Product> showAll(){
+        return service.findAll();
+    }
 }

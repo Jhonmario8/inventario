@@ -18,7 +18,8 @@ public class ClientService {
     public ResponseEntity<?> findById(Integer id) {
         Optional<Client> clientOpt = repository.findById(id);
         if (clientOpt.isPresent()) {
-            return ResponseEntity.ok(clientOpt.get());
+            Client client=clientOpt.get();
+            return ResponseEntity.ok(client);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro el cliente");
         }
@@ -51,8 +52,13 @@ public class ClientService {
     }
 
     public ResponseEntity<?> update(Client client){
-        if (repository.existsById(client.getId())){
-            repository.save(client);
+        Optional<Client> clientOpt=repository.findById(client.getId());
+        if (clientOpt.isPresent()){
+            Client cli=clientOpt.get();
+            cli.setName(client.getName());
+            cli.setPhone(client.getPhone());
+            cli.setAge(client.getAge());
+            repository.save(cli);
             return ResponseEntity.ok("Cliente Actualizado exitosamente");
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El cliente no se encontro");

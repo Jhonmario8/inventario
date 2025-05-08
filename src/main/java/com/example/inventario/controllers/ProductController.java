@@ -22,7 +22,7 @@ public class ProductController {
     public void save(@RequestBody Product product){
         service.save(product);
     }
-    @PostMapping("/update")
+    @PutMapping("/update")
     public void update(@RequestBody Product product){
          service.update(product);
     }

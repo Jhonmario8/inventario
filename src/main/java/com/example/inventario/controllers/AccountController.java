@@ -39,4 +39,8 @@ public class AccountController {
         return service.delete(id);
     }
 
+    @GetMapping("getQuantity/{idClient}/product/{idProduct}")
+    public int getQuantitty(@PathVariable int idClient,@PathVariable int idProduct){
+        return service.getQuantity(idClient,idProduct);
+    }
 }

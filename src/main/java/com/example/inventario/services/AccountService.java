@@ -7,10 +7,14 @@ import com.example.inventario.entities.Product;
 import com.example.inventario.repositories.AccountRepository;
 import com.example.inventario.repositories.ClientRepository;
 import com.example.inventario.repositories.ProductRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +27,9 @@ public class AccountService {
     private ClientRepository clientRepository;
     @Autowired
     private ProductRepository productRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
+
 
     public ResponseEntity<?> findById(Integer id) {
         Optional<Account> optionalAccount = repository.findById(id);
@@ -54,7 +61,8 @@ public class AccountService {
             repository.save(ac);
         }
     }
-
+    @Transactional
+    @Modifying(clearAutomatically = true)
     public ResponseEntity<?> addProduct(AddProdutctDto request) {
         Optional<Product> productOpt = productRepository.findById(request.getProductId());
         Optional<Account> accountOpt = repository.findByClientId(request.getIdCliente());
@@ -62,11 +70,9 @@ public class AccountService {
         if (productOpt.isPresent() && accountOpt.isPresent()) {
             Account ac = accountOpt.get();
             Product p = productOpt.get();
-            ac.getProducts().add(p);
-            p.getAccounts().add(ac);
             p.setStock(p.getStock()-request.getStock());
-            ac.setMount(ac.getMount() + p.getPrice());
-            repository.save(ac);
+            ac.setMount(ac.getMount() + (p.getPrice()*request.getStock()));
+            repository.addProduct(ac.getId(),p.getCode(), request.getStock());
             return ResponseEntity.ok("Producto asignado con exito");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El producto o la cuenta no existen");
@@ -107,5 +113,16 @@ public class AccountService {
         }
     }
 
+    public int getQuantity(Integer idAccount,Integer idProduct){
+        Optional<Account>accountOpt=repository.findByClientId(idAccount);
+        Optional<Product>productOpt=productRepository.findById(idProduct);
+        if (accountOpt.isPresent() && productOpt.isPresent()){
+            Account ac=accountOpt.get();
+            return repository.getQuantity(ac.getId(),idProduct);
+        }
+        else {
+            return 0;
+        }
+    }
 
 }

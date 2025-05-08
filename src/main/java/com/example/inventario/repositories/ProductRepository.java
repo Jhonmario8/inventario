@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository extends CrudRepository<Product,Integer> {
-    @Query("SELECT p from Product p where p.name like %:name%")
+    @Query("SELECT p FROM Product p WHERE p.name LIKE %:name% ORDER BY p.name")
     List<Product> findContainsName(@Param("name") String name);
     void deleteByName(String name);
     Optional<Product> findByName(@Param("name") String name);
+
+
+
 }

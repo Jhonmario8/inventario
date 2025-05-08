@@ -24,7 +24,7 @@ public class Account {
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(
-            name = "account-product",
+            name = "account_product",
             joinColumns = @JoinColumn(name = "idAccount"),
             inverseJoinColumns = @JoinColumn(name="idProduct")
     )

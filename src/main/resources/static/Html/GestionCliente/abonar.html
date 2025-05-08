@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario</title>
+    <link rel="stylesheet" href="../../Styles/Styles.css">
+</head>
+<body>
+<body>
+
+<form action="" class="form-style">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" required>
+    <p class="info"></p>
+    <div>
+        <button id="buscarBtn">Buscar</button>
+        <button type="button" onclick="location.href='GestionCliente.html'">Volver</button>
+    </div>
+</form>
+
+<table style="display: none">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="products"></tbody>
+</table>
+<div id="btn">
+
+</div>
+<script src="../../Scripts/Client/abonar.js"></script>
+</body>
+</body>
+</html>

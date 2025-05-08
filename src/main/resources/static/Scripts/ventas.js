@@ -16,9 +16,8 @@ function crearFila(p, cant = null) {
     const input = row.querySelector("input");
     const totalCell = row.querySelector(".total");
 
-    input.addEventListener("input", () => {
-        input.addEventListener("input", () => {
-            const nuevaCantidad = parseFloat(input.value) || 0;
+        input.addEventListener("input", e => {
+            const nuevaCantidad = parseFloat(e.target.value) || 0;
             const nuevoTotal = nuevaCantidad * p.price;
             totalCell.textContent = nuevoTotal;
 
@@ -28,7 +27,7 @@ function crearFila(p, cant = null) {
                 producto.stock = nuevaCantidad;
             }
         });
-    })
+
 
         return row;
 }

@@ -17,7 +17,7 @@ async function mostrar(){
             throw new Error("Error al obtener los productos")
         }
         let products=await res.json()
-        products.forEach(p=>{
+        products.slice(0,10).forEach(p=>{
             let row=createRow(p)
             body.appendChild(row)
         })

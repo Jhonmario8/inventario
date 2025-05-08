@@ -46,10 +46,10 @@ document.getElementById("buscarBtn").addEventListener("click",async e=> {
         e.preventDefault()
         try {
             let response = await fetch(`http://localhost:8080/products/update`, {
-                method: "POST",
+                method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
-                    id: per.id,
+                    code: per.code,
                     name: name.value,
                     price: price.value,
                     stock: stock.value
@@ -58,7 +58,7 @@ document.getElementById("buscarBtn").addEventListener("click",async e=> {
             if (!response.ok) {
                 throw new Error("Error al actualizar el producto")
             }
-            alert("Persona actualizada con exito")
+            alert("Producto actualizado con exito")
         } catch (e) {
             console.error(e)
         }

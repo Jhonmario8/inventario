@@ -56,7 +56,7 @@ public class ProductService {
         if (productOpt.isPresent()){
             return ResponseEntity.ok(productOpt.get());
         } else {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro el producto");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro el producto");
         }
     }
     @Transactional

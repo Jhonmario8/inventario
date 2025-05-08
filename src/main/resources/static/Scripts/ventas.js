@@ -50,6 +50,9 @@ document.getElementById("product").addEventListener("input",async e=>{
         }
         let prods=await res.json()
         prods.forEach(p=>{
+            if (p.stock<=0){
+                return
+            }
             let row=crearFila(p)
             tbody.appendChild(row)
             row.addEventListener("dblclick", e=>{
